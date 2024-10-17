@@ -2,6 +2,8 @@ package com.example.SerialNumberScanner.Models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Role {
 
@@ -11,9 +13,8 @@ public class Role {
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "permission_id", referencedColumnName = "id")
-    private Permission permission;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     // Getters and Setters
     public Long getId() {
@@ -30,14 +31,6 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
     }
 }
 

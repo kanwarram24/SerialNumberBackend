@@ -2,6 +2,8 @@ package com.example.SerialNumberScanner.Models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class User {
 
@@ -16,9 +18,13 @@ public class User {
     @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 
     // Getters and Setters
     public Long getId() {
@@ -53,11 +59,4 @@ public class User {
         this.organization = organization;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
