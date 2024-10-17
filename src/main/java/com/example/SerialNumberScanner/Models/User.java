@@ -1,6 +1,7 @@
 package com.example.SerialNumberScanner.Models;
 
 import jakarta.persistence.*;
+import org.springframework.beans.PropertyValues;
 
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class User {
     private Long id;
 
     private String username;
-    private String passwordHash;
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "organization_id", nullable = false)
@@ -43,12 +44,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Organization getOrganization() {
@@ -59,4 +60,11 @@ public class User {
         this.organization = organization;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
